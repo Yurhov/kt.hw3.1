@@ -28,9 +28,12 @@ fun hourPhrase(time: Int): String {
 
 fun minutePhrase(time: Int): String {
     val minute = (time / 60)
-    return when (minute % 10) {
-        1 -> "$minute минуту назад"
-        2, 3, 4 -> "$minute минуты назад"
-        else -> "$minute минут назад"
+    return if (minute % 10 == 1 && minute != 11) "$minute минуту назад"
+    else if (minute == 12 || minute == 13 || minute == 14) "$minute минут назад"
+    else {
+        when (minute % 10) {
+            2, 3, 4 -> "$minute минуты назад"
+            else -> "$minute минут назад"
+        }
     }
 }
